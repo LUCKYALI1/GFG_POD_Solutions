@@ -17,6 +17,3 @@ Here, you'll find efficient and well-structured C++ solutions for daily coding c
   - Binary Search & More...
 
 ---
-
-## 📂 Folder Structure
-
