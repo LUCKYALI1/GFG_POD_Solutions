@@ -1,0 +1,27 @@
+class Solution {
+  public:
+    int solve(vector<int>& arr, int index, int end, vector<int>& dp) {
+        if(index > end) {
+            return 0;
+        }
+        if(dp[index] != -1) return dp[index];
+        
+        int include = arr[index] + solve(arr, index + 2, end, dp);
+        int exclude = solve(arr, index + 1, end, dp);
+        
+        return dp[index] = max(include, exclude);
+    }
+    
+    int maxValue(vector<int>& arr) {
+        int n = arr.size();
+        if(n == 0) return 0;
+        if(n == 1) return arr[0];
+        
+        vector<int> dp1(n, -1), dp2(n, -1);
+        int max1 = solve(arr, 0, n-2, dp1);  // exclude last
+        int max2 = solve(arr, 1, n-1, dp2);  // exclude first
+        
+        return max(max1, max2);
+    }
+
+};
