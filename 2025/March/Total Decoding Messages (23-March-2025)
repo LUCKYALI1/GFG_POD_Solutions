@@ -1,0 +1,29 @@
+class Solution {
+  public:
+  int decodeHelper(string &digits, int i, vector<int> &dp) {
+    int n = digits.size();
+    if (i == n) return 1;        
+    if (digits[i] == '0') return 0; 
+    if (dp[i] != -1) return dp[i];
+
+    
+    int ways = decodeHelper(digits, i + 1, dp);
+
+    
+    if (i + 1 < n) {
+        int twoDigit = stoi(digits.substr(i, 2));
+        if (twoDigit >= 10 && twoDigit <= 26) {
+            ways += decodeHelper(digits, i + 2, dp);
+        }
+    }
+
+    return dp[i] = ways;
+}
+
+    int countWays(string &digits) {
+        int n = digits.size();
+        vector<int> dp(n, -1); 
+        return decodeHelper(digits, 0, dp);
+        
+    }
+};
