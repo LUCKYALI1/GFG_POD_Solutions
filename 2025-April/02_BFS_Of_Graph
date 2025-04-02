@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> bfs(vector<vector<int>> &adj) {
+    int n = adj.size(); // Number of nodes
+    vector<int> bfsTraversal; // Stores BFS order
+    vector<bool> visited(n, false); // Visited array
+    
+    queue<int> q;
+    q.push(0); // Assuming BFS starts from node 0
+    visited[0] = true;
+
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        bfsTraversal.push_back(node);
+
+        // Visit all adjacent nodes
+        for (int neighbor : adj[node]) {
+            if (!visited[neighbor]) {
+                q.push(neighbor);
+                visited[neighbor] = true;
+            }
+        }
+    }
+
+    return bfsTraversal;
+}
